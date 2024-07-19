@@ -1,0 +1,39 @@
+{
+    "name": "mvaliolahi/blaze",
+    "description": "A Laravel package for speedup laravel routes by generate an static version of them.",
+    "authors": [
+        {
+            "name": "Meysam Valiolahi",
+            "email": "mvaliolahi@gmail.com"
+        }
+    ],
+    "type": "library",
+    "require": {
+        "php": "^7.3|^8.0",
+        "illuminate/support": "^8.0|^9.0|^10.0",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mvaliolahi\\Blaze\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mvaliolahi\\Blaze\\BlazeServiceProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0|^10.1",
+        "orchestra/testbench": "^8.18|^9.0"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
