@@ -156,6 +156,8 @@ You should also add `@blaze` directive before the body tag ends for handle csrf.
 After that change / location to:
 ```nginx
 location / {
+    etag off;
+    
     # 1. All method except GET must be proxied to PHP-FPM (post, put, patch, delete)
     if ($request_method !~ ^(GET)$ ) {
         rewrite ^ /index.php$query_string last;

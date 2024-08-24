@@ -30,15 +30,26 @@ class BlazeMiddleware
         $response = $next($request);
         if ($response->isSuccessful() && $request->isMethod('get') && !$request->ajax()) {
             $this->setCacheHeaders($response);
-            $this->service->createCacheFile($filename, $response->getContent());
+            $content = $response->getContent();
+
+            if (app()->environment('local')) {
+                $content = $this->appendToTitleTag($content, " - {$type}");
+            }
+
+            $this->service->createCacheFile($filename, $content);
         }
 
         return $response;
     }
 
+    public function appendToTitleTag($html, $appendText)
+    {
+        $endTag = '</title>';
+        return str_replace($endTag, $appendText . $endTag, $html);
+    }
+
     protected function setCacheHeaders($response)
     {
-        // TODO :: can be replace with Laravel internal middleware
         $response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
         $response->headers->set('Pragma', 'no-cache');
         $response->headers->set('Expires', '0');
